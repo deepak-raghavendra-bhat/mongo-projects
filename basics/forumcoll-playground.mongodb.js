@@ -81,3 +81,65 @@ db.posts.insertMany(docs);
 
 db.posts.totalSize();
 
+
+show dbs;
+
+// find method
+
+db.getCollection('posts').find({});
+
+db.getCollection('posts').find({postId: 3015});
+
+
+db.getCollection('posts').find({comments: 2});
+
+db.getCollection('posts').find({"author.name": 'Emily Watson'})
+
+
+db.getCollection('posts').find({tags: 'programming'})
+
+// query operators
+
+db.getCollection('posts').find({comments: {$gt: 0}})
+
+db.getCollection('posts').find({comments: {$lt: 5}})
+
+
+db.getCollection('posts').find({
+  $and: [
+    {comments: {$lt: 5}},
+    {comments: {$gt: 0}}
+  ]
+  });
+
+  db.getCollection('posts').find({
+    $or: [
+      {shared: true},
+      {tags: 'programming'}
+    ]
+
+  });
+
+  db.getCollection('posts').find({
+    tags: {$in: [
+    'programming',
+    'coding'
+  ]}
+  });
+
+  // limits
+
+  db.getCollection('posts').find({}).limit(3)
+
+  db.getCollection('posts').find({}).skip(4)
+
+  db.getCollection('posts').find({}).sort({comments: -1})
+
+  db.getCollection('posts').find({}).sort({comments: 1})
+
+  db.getCollection('posts').find({}).sort({title: 1})
+
+  db.getCollection('posts').
+  find({}).
+  skip(2).
+  sort({shared: 1})
