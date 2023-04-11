@@ -1,3 +1,5 @@
+use('forum');
+
 // insert one
 const doc = {
     title: "What is the best way to learn JavaScript from the ground up?",
@@ -43,7 +45,7 @@ db.posts.insertMany([{
           nickname: "emily23"
         }
       }
-])
+]);
 
 // insert many with var
 
@@ -143,3 +145,30 @@ db.getCollection('posts').find({
   find({}).
   skip(2).
   sort({shared: 1})
+
+  // update operations
+
+  // set operator
+  db.posts.updateOne({postId: 2618},
+    {$set: {shared: true}}
+    );
+
+  db.getCollection('posts').find({postId: 2618})
+
+  db.getCollection('posts').findOne({tags: []})
+
+  // unset
+  
+  db.posts.updateMany(
+    {tags: []},
+    {$unset: {tags: 1}}
+    )
+
+    db.getCollection('posts').findOne({tags: []})
+
+    // increment comment by one
+
+    db.posts.updateOne({postId: 2618},
+      {$inc: {comments: 1}}
+      );
+
